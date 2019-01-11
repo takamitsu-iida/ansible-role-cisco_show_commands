@@ -36,21 +36,22 @@
     # telnetで接続する場合はmytelnetモジュールを使います
     # https://github.com/takamitsu-iida/ansible-mytelnet
     #
-    - name: run exec commands on remote nodes bia Telnet
-      # mytelnetを利用する場合、delegate_toの指定は必須です。制御ノードから接続するならlocalhostを指定。
-      # delegate_to: localhost
-      mytelnet:
-        commands: "{{ CMD_LIST }}"
-      delegate_to: pg04
-      register: result
-      when:
-        - (ansible_connection is not defined) or (ansible_connection != 'network_cli')
 
-    - name: set output list as stdout, Telnet
-      set_fact:
-        stdout: "{{ result.stdout }}"
-      when:
-        - "'stdout' in result"
+    # - name: run exec commands on remote nodes bia Telnet
+    #   # mytelnetを利用する場合、delegate_toの指定は必須です。制御ノードから接続するならlocalhostを指定。
+    #   # delegate_to: localhost
+    #   mytelnet:
+    #     commands: "{{ CMD_LIST }}"
+    #   delegate_to: pg04
+    #   register: result
+    #   when:
+    #     - (ansible_connection is not defined) or (ansible_connection != 'network_cli')
+    #
+    # - name: set output list as stdout, Telnet
+    #   set_fact:
+    #     stdout: "{{ result.stdout }}"
+    #   when:
+    #     - "'stdout' in result"
 
   rescue:
     - name: save failed result
