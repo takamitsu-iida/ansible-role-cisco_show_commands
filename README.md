@@ -5,7 +5,11 @@ Cisco IOS装置に対してshowコマンドを実行して出力結果をファ�
 
 show interfacesコマンドおよびshow ip routeコマンドの出力はCSVに変換して保存します。
 
-ansible-galaxy install -p ./roles git+https://github.com/takamitsu-iida/ansible-role-cisco-show-commands.git
+以下のコマンドでインストールした後、お好みのロール名になるようにフォルダ名を変更してください。
+
+```
+ansible-galaxy install -p ./roles git+https://github.com/takamitsu-iida/ansible-role-cisco_show_commands.git
+```
 
 Requirements
 ------------
