@@ -59,23 +59,23 @@ Example Playbook
 
 ```bash
 log
-├── r1_show_commands_2019-01-11@13:36:54_interfaces.txt
-├── r1_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
-├── r1_show_commands_2019-01-11@13:36:54_interfaces_route.csv
-├── r2_show_commands_2019-01-11@13:36:54_interfaces.txt
-├── r2_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
-├── r2_show_commands_2019-01-11@13:36:54_interfaces_route.csv
-├── r3_show_commands_2019-01-11@13:36:54_interfaces.txt
-├── r3_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
-├── r3_show_commands_2019-01-11@13:36:54_interfaces_route.csv
-├── r4_show_commands_2019-01-11@13:36:54_interfaces.txt
-├── r4_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
-└── r4_show_commands_2019-01-11@13:36:54_interfaces_route.csv
+├── r1_show_commands_2019-01-11@16:31:37.txt
+├── r1_show_commands_2019-01-11@16:31:37_interface.csv
+├── r1_show_commands_2019-01-11@16:31:37_route.csv
+├── r2_show_commands_2019-01-11@16:31:37.txt
+├── r2_show_commands_2019-01-11@16:31:37_interface.csv
+├── r2_show_commands_2019-01-11@16:31:37_route.csv
+├── r3_show_commands_2019-01-11@16:31:37.txt
+├── r3_show_commands_2019-01-11@16:31:37_interface.csv
+├── r3_show_commands_2019-01-11@16:31:37_route.csv
+├── r4_show_commands_2019-01-11@16:31:37.txt
+├── r4_show_commands_2019-01-11@16:31:37_interface.csv
+└── r4_show_commands_2019-01-11@16:31:37_route.csv
 ```
 
 <img width="942" alt="interfaces" src="https://user-images.githubusercontent.com/21165341/51014162-8d8d1300-15a9-11e9-979d-bcb94b09081f.png">
 
-<img width="948" alt="route" src="https://user-images.githubusercontent.com/21165341/51014214-c6c58300-15a9-11e9-8bde-f6a39a45f58c.png">
+<img width="949" alt="route" src="https://user-images.githubusercontent.com/21165341/51019673-267a5900-15bf-11e9-96c3-44b3a0728442.png">
 
 作業前と作業後でログ置き場を変えたい場合は、このようにします。
 作業前はbefore、作業後はafterにログが残ります。

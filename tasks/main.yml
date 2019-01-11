@@ -1,6 +1,6 @@
 ---
 
-- name: create log directory if not exists
+- name: CREATE LOG DIRECTORY IF NOT EXISTS
   delegate_to: localhost
   file:
     path: "{{ LOG_PATH | default('./log') }}"
@@ -9,18 +9,18 @@
   run_once: true
   when: CREATE_LOG
 
-- name: get current time
+- name: GET CURRENT TIME
   set_fact:
     # 2019-01-10@17:45:40
     date: "{{ lookup('pipe', 'date +%Y-%m-%d@%H:%M:%S') }}"
 
-- name: set filename base
+- name: SET BASE FILENAME
   set_fact:
-    filename: "{{ PREFIX | default('') + inventory_hostname + '_' + role_name | basename + '_' + date + '_interfaces' }}"
+    filename: "{{ PREFIX | default('') + inventory_hostname + '_' + role_name | basename + '_' + date }}"
 
 -
   block:
-    - name: run exec commands on remote nodes bia SSH
+    - name: RUN EXEC COMMANDS ON REMOTE NODE BIA SSH
       # delegate_to:
       ios_command:
         commands: "{{ CMD_LIST }}"
@@ -28,7 +28,7 @@
       when:
         - (ansible_connection is defined) and (ansible_connection == 'network_cli')
 
-    - name: set output list as stdout, SSH
+    - name: SET OUTPUT LIST AS STDOUT, SSH
       set_fact:
         stdout: "{{ result.stdout }}"
       when: "'stdout' in result"
@@ -38,7 +38,7 @@
     # https://github.com/takamitsu-iida/ansible-mytelnet
     #
 
-    # - name: run exec commands on remote nodes bia Telnet
+    # - name: RUN EXEC COMMANDS ON REMOTE NODE BIA TELNET
     #   # mytelnetを利用する場合、delegate_toの指定は必須です。制御ノードから接続するならlocalhostを指定。
     #   # delegate_to: localhost
     #   mytelnet:
@@ -48,14 +48,14 @@
     #   when:
     #     - (ansible_connection is not defined) or (ansible_connection != 'network_cli')
     #
-    # - name: set output list as stdout, Telnet
+    # - name: SET OUTPUT LIST AS STDOUT, TELNET
     #   set_fact:
     #     stdout: "{{ result.stdout }}"
     #   when:
     #     - "'stdout' in result"
 
   rescue:
-    - name: save failed result
+    - name: SAVE FAILED RESULT
       delegate_to: localhost
       copy:
         content: "{{ result | to_nice_json(indent=2) }}"
@@ -66,11 +66,11 @@
       when:
         - CREATE_LOG
 
-    - name: fail if error occured
+    - name: FAIL IF ERROR OCCURED
       fail:
         msg: "Failed to execute command on remote device {{ inventory_hostname }}"
 
-# - name: display
+# - name: DISPLAY RESULT
 #   debug:
 #     msg: |
 #       {% for item in CMD_LIST -%}
@@ -80,7 +80,7 @@
 #   when:
 #     - stdout
 
-- name: save
+- name: SAVE RESULT
   delegate_to: localhost
   copy:
     content: |
@@ -99,7 +99,7 @@
 # show interfacesの結果をCSVに変換して保存
 #
 
-- name: parse by ntc-templates
+- name: PARSE OUTPUT USING NTC-TEMPLATES, INTERFACES
   set_fact:
     parsed_list: "{{ stdout[INDEX] | parse_cli_textfsm(NTC_PATH) }}"
   vars:
@@ -107,7 +107,7 @@
     NTC_PATH: "{{ NTC_PATH_INTERFACE }}"
 
 # 結果をCSVでファイルに保存する
-- name: save as csv, show interfaces
+- name: SAVE AS CSV, SHOW INTERFACES
   delegate_to: localhost
   template:
     src: interfaces_csv.j2
@@ -122,7 +122,7 @@
 # show ip routeの結果をCSVに変換して保存
 #
 
-- name: parse by ntc-templates
+- name: PARSE OUTPUT USING NTC-TEMPLATES, ROUTE
   set_fact:
     parsed_list: "{{ stdout[INDEX] | parse_cli_textfsm(NTC_PATH) }}"
   vars:
@@ -130,7 +130,7 @@
     NTC_PATH: "{{ NTC_PATH_ROUTE }}"
 
 # 結果をCSVでファイルに保存する
-- name: save as csv, show ip route
+- name: SAVE AS CSV, SHOW IP ROUTE
   delegate_to: localhost
   template:
     src: ip_route_csv.j2
