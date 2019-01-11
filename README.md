@@ -1,9 +1,12 @@
-show_run
-=========
+cisco_show_commands
+===================
 
 Cisco IOS装置に対してshowコマンドを実行して出力結果をファイルに保存します。
 
-show interfacesコマンドおよびshow ip routeコマンドの出力はCSVに変換して保存します。
+これ（↓）をもとに改造したものです。
+<https://github.com/takamitsu-iida/ansible-role-cisco_show_run>
+
+大きな違いはshow interfacesコマンドおよびshow ip routeコマンドの出力をCSVに変換してから保存している点です。
 
 以下のコマンドでインストールした後、お好みのロール名になるようにフォルダ名を変更してください。
 
@@ -49,6 +52,24 @@ Example Playbook
 
     - include_role:
         name: cisco_show_commands
+```
+
+実行すると対象ノードあたり６個のファイルが生成されます（作業前３個、作業後３個）。
+
+```bash
+log
+├── r1_show_commands_2019-01-11@13:36:54_interfaces.txt
+├── r1_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
+├── r1_show_commands_2019-01-11@13:36:54_interfaces_route.csv
+├── r2_show_commands_2019-01-11@13:36:54_interfaces.txt
+├── r2_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
+├── r2_show_commands_2019-01-11@13:36:54_interfaces_route.csv
+├── r3_show_commands_2019-01-11@13:36:54_interfaces.txt
+├── r3_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
+├── r3_show_commands_2019-01-11@13:36:54_interfaces_route.csv
+├── r4_show_commands_2019-01-11@13:36:54_interfaces.txt
+├── r4_show_commands_2019-01-11@13:36:54_interfaces_interface.csv
+└── r4_show_commands_2019-01-11@13:36:54_interfaces_route.csv
 ```
 
 作業前と作業後でログ置き場を変えたい場合は、このようにします。
