@@ -1,0 +1,32 @@
+{#
+Ciscoのshow interfacesをCSV形式にするテンプレート。
+
+    "parsed_list": [
+        {
+            "ADDRESS": "0800.2701.9369",
+            "BANDWIDTH": "1000000 Kbit",
+            "BIA": "0800.2701.9369",
+            "DELAY": "10 usec",
+            "DESCRIPTION": "2018-11-16T07:52:42Z",
+            "DUPLEX": "Full Duplex",
+            "ENCAPSULATION": "ARPA",
+            "HARDWARE_TYPE": "CSR vNIC",
+            "INPUT_RATE": "0",
+            "INTERFACE": "GigabitEthernet1",
+            "IP_ADDRESS": "10.0.2.15/24",
+            "LINK_STATUS": "up",
+            "MTU": "1500",
+            "OUTPUT_RATE": "0",
+            "PROTOCOL_STATUS": "up",
+            "QUEUE_STRATEGY": "fifo",
+            "SPEED": "1000Mbps"
+        },
+
+プレイブックは
+  set_fact: parsed_list
+しているのを前提にしているので、parsed_listオブジェクトから情報を取り出す。
+#}
+"ADDRESS","BANDWIDTH","BIA","DELAY","DESCRIPTION","DUPLEX","ENCAPSULATION","HARDWARE_TYPE","INPUT_RATE","INTERFACE","IP_ADDRESS","LINK_STATUS","MTU","OUTPUT_RATE","PROTOCOL_STATUS","QUEUE_STRATEGY","SPEED"
+{% for item in parsed_list -%}
+{{item.ADDRESS | default('')}},{{item.BANDWIDTH | default('')}},{{item.BIA | default('')}},{{item.DELAY | default('')}},{{item.DESCRIPTION | default('')}},{{item.DUPLEX | default('')}},{{item.ENCAPSULATION | default('')}},{{item.HARDWARE_TYPE | default('')}},{{item.INPUT_RATE | default('')}},{{item.INTERFACE | default('')}},{{item.IP_ADDRESS | default('')}},{{item.LINK_STATUS | default('')}},{{item.MTU | default('')}},{{item.OUTPUT_RATE | default('')}},{{item.PROTOCOL_STATUS | default('')}},{{item.QUEUE_STRATEGY | default('')}},{{item.SPEED | default('')}}
+{% endfor %}

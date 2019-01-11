@@ -1,0 +1,22 @@
+---
+
+# 実行コマンド
+CMD_LIST:
+  # 先頭3行は固定
+  - show running-config
+  - show interfaces
+  - show ip route
+
+# ログをファイルに保存するか
+CREATE_LOG: true
+
+# ログファイルの先頭につける文字列
+PREFIX: ''
+
+# ログを残すフォルダ
+# LOG_PATH: "{{ role_path + '/log' }}"
+LOG_PATH: "{{ lookup('env', 'PWD') + '/log' }}"
+
+# NTCテンプレートファイル
+NTC_PATH_INTERFACE: "{{ role_path + '/files/cisco_ios_show_interfaces.template' }}"
+NTC_PATH_ROUTE: "{{ role_path + '/files/cisco_ios_show_ip_route.template' }}"

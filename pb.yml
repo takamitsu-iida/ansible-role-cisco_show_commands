@@ -1,0 +1,36 @@
+---
+
+#
+# Ciscoルータのshow running-config出力を表示します。
+#
+# 2019/01/10 初版
+#
+# Takamitsu IIDA (@takamitsu-iida)
+
+- name: collect show command outout
+  hosts: "{{ target_hosts | default('') }}"  # defined in hosts.yml
+  vars_files:
+    - hosts.yml
+  gather_facts: false
+  strategy: linear  # linearは全てのホストでタスクが完了してから次に遷移する(デフォルト)。freeにすると待ち合わせをしない
+  serial: 0  # 0はfork数だけ同時に実行(デフォルト)
+
+  tasks:
+
+    - name: fail script if required target_hosts parameter is missing
+      fail:
+        msg: "You have to add the --extra-vars='target_hosts='"
+      when:
+        - (target_hosts is not defined) or (target_hosts == '')
+
+    - include_role:
+        name: cisco/show_commands
+      vars:
+        # 保存フォルダはデフォルトで実行ディレクトリ "{{ lookup('env', 'PWD') + '/log' }}" になっている
+        # 作業前、作業後でフォルダを分けたいときはここで指定する
+        # LOG_PATH: "{{ lookup('env', 'PWD') + '/log' }}"
+
+        # ファイル名の先頭に文字列をつけたいときに指定
+        # 変更作業前はbefore_、作業後はafter_、等をつけると分かりやすいかも。
+        # PREFIX: before_
+        # PREFIX: after_
