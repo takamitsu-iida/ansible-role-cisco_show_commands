@@ -7,7 +7,7 @@ show interfacesコマンドおよびshow ip routeコマンドの出力はCSVに�
 
 以下のコマンドでインストールした後、お好みのロール名になるようにフォルダ名を変更してください。
 
-```
+```bash
 ansible-galaxy install -p ./roles git+https://github.com/takamitsu-iida/ansible-role-cisco_show_commands.git
 ```
 

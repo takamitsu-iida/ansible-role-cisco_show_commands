@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: cisco_show_commands
-  author: Takamitsu IIDA
+  author: takamitsu-iida
   description: execute commands on cisco ios device and save output to file.
   company:
 
