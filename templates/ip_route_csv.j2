@@ -5,7 +5,7 @@ Ciscoのshow ip routeをCSV形式にするテンプレート。
   set_fact: parsed_list
 しているのを前提にしているので、parsed_listオブジェクトから情報を取り出す。
 #}
-"DISTANCE","MASK","METRIC","NETWORK","NEXTHOP_IF","NEXTHOP_IP","PROTOCOL","TYPE","UPTIME"
+"NETWORK","MASK","NEXTHOP_IP","NEXTHOP_IF","DISTANCE","METRIC","PROTOCOL","TYPE","UPTIME"
 {% for item in parsed_list -%}
-{{item.DISTANCE | default('')}},{{item.MASK | default('')}},{{item.METRIC | default('')}},{{item.NETWORK | default('')}},{{item.NEXTHOP_IF | default('')}},{{item.NEXTHOP_IP | default('')}},{{item.PROTOCOL | default('')}},{{item.TIME | default('')}},{{item.UPTIME | default('')}}
+{{item.NETWORK | default('')}},{{item.MASK | default('')}},{{item.NEXTHOP_IP | default('')}},{{item.NEXTHOP_IF | default('')}},{{item.DISTANCE | default('')}},{{item.METRIC | default('')}},{{item.PROTOCOL | default('')}},{{item.TIME | default('')}},{{item.UPTIME | default('')}}
 {% endfor %}
