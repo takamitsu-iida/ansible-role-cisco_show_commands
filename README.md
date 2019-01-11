@@ -38,7 +38,7 @@ Dependencies
 Example Playbook
 ----------------
 
-設定変更するタスクの前後に挿入するとよいでしょう。
+使い方はinclude_roleで呼び出すだけです。
 
 ```yml
 - name: execute show commands
@@ -48,14 +48,9 @@ Example Playbook
   tasks:
     - include_role:
         name: cisco_show_commands
-
-    - 設定変更するタスク
-
-    - include_role:
-        name: cisco_show_commands
 ```
 
-実行すると対象ノードあたり６個のファイルが生成されます（作業前３個、作業後３個）。
+これを実行すると対象ノードあたり３個のファイルが生成されます。
 
 ```bash
 log
@@ -73,9 +68,32 @@ log
 └── r4_show_commands_2019-01-11@16:31:37_route.csv
 ```
 
+show interfacesコマンドの出力結果はCSVに変換され、拡張子.csvで保存されます。
+
 <img width="942" alt="interfaces" src="https://user-images.githubusercontent.com/21165341/51014162-8d8d1300-15a9-11e9-979d-bcb94b09081f.png">
 
+同様に、show ip routeコマンドの出力結果もCSVに変換されます。
+
 <img width="949" alt="route" src="https://user-images.githubusercontent.com/21165341/51019673-267a5900-15bf-11e9-96c3-44b3a0728442.png">
+
+実際に利用するときには、設定変更するタスクの前後に挿入するとよいでしょう。
+
+```yml
+- name: execute show commands
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - include_role:
+        name: cisco_show_commands
+
+    - 設定変更するタスク
+
+    - include_role:
+        name: cisco_show_commands
+```
+
+このようにすると対象ノードあたり６個ものファイルが生成されてしまい、ファイルの識別が難しくなります。
 
 作業前と作業後でログ置き場を変えたい場合は、このようにします。
 作業前はbefore、作業後はafterにログが残ります。
