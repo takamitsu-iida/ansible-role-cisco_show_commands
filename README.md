@@ -4,6 +4,7 @@ cisco_show_commands
 Cisco IOS装置に対してshowコマンドを実行して出力結果をファイルに保存します。
 
 これ（↓）をもとに改造したものです。
+
 <https://github.com/takamitsu-iida/ansible-role-cisco_show_run>
 
 大きな違いはshow interfacesコマンドおよびshow ip routeコマンドの出力をCSVに変換してから保存している点です。
